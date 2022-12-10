@@ -11,7 +11,7 @@ pipeline {
   stages {
       stage('GIT_Clone') {
         steps {
-        checkout changelog: false, poll: false, scm: [ $class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url:'https://github.com/AkshayPatil5995/terraform-pipeline.git']]]
+        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/CodvaTech-Labs/terraform-course.git']]]
            }
         }
         stage('Terraform_Setup') {
@@ -20,6 +20,7 @@ pipeline {
                     if (params.Env == "Create") {
                        sh '''
                        echo "terraform create is in progress"
+                       cd terraform_backend_demo
                        ls
                        terraform init -input=false
                        terraform apply --auto-approve -input=false
@@ -28,6 +29,7 @@ pipeline {
                     } else {
                        sh '''
                        echo "terraform destory is in progress"
+                       cd terraform_backend_demo
                        terraform init -input=false
                        terraform destroy --auto-approve -input=false
                        '''                
@@ -38,3 +40,4 @@ pipeline {
     
   }
 }
+
