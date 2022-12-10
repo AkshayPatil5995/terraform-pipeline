@@ -11,13 +11,13 @@ pipeline {
   stages {
       stage('GIT_Clone') {
         steps {
-        checkout changelog: false, poll: false, scm: [ $class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url:'https://github.com/AkshayPatil5995/terraform-pipeline/Jenkinsfile.git']]]
+        checkout changelog: false, poll: false, scm: [ $class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url:'https://github.com/AkshayPatil5995/terraform-pipeline.git']]]
            }
         }
         stage('Terraform_Setup') {
             steps {
                 script {
-                    if (params.Env == "Create") {
+                    if (parameters.Env == "Create") {
                        sh '''
                        echo "terraform create is in progress"
                        ls
