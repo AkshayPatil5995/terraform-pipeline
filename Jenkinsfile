@@ -17,7 +17,7 @@ pipeline {
         stage('Terraform_Setup') {
             steps {
                 script {
-                    if (parameters.Env == "Create") {
+                    if (params.Env == "Create") {
                        sh '''
                        echo "terraform create is in progress"
                        ls
